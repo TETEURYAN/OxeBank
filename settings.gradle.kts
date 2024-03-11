@@ -1,1 +1,1 @@
-rootProject.name = "OxeBanking"
+rootProject.name = "credito"

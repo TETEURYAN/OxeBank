@@ -1,11 +1,11 @@
-package com.OxeBank.OxeBanking
+package com.OxeBank.banking
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class OxeBankingApplication
+class CreditApplication
 
 fun main(args: Array<String>) {
-	runApplication<OxeBankingApplication>(*args)
+	runApplication<CreditApplication>(*args)
 }
