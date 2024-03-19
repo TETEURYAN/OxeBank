@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import java.math.BigDecimal
 
-@Entity(name = "credito")
+@Entity(name = "produto")
 data class CreditoEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

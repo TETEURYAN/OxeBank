@@ -1,6 +1,6 @@
-insert into credito(nome,descricao,categoria, preco)
-values ('x-tudo', 'completo no capricho', 'hamburguer', 25.40);
-insert into credito(nome,descricao,categoria, preco)
-values ('refrigerante lata', 'coca-cola, kuat, sprite, fanta', 'bebida', 7.50);
-insert into credito(nome,descricao,categoria, preco)
-values ('batata frita simples', '200 gramas de batata frita', 'porções', 12.00);
+insert into produto(nome,descricao,categoria, preco)
+values ('Notebook Dell Ispireon 8567', '8Gb de Ram, 1 TB SSD e 15 polegaas', 'Notebooks', 3200.00);
+insert into produto(nome,descricao,categoria, preco)
+values ('Cadeira gamer', 'TGT Heron', 'Moveis', 400.00);
+insert into produto(nome,descricao,categoria, preco)
+values ('Mousepad gamer Multilaer 7.2 polegadas', 'Mousepad da Multilaser', 'Acessorios', 12.00);

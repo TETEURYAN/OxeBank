@@ -1,4 +1,4 @@
-create table credito(
+create table produto(
     id serial not null,
     nome varchar(50) not null,
     descricao varchar(50) not null,
