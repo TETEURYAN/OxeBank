@@ -12,6 +12,7 @@ data class CreditoEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long?,
+    var iduser: Long?,
     val nome: String,
     val descricao: String,
     val preco: BigDecimal,
@@ -21,6 +22,7 @@ data class CreditoEntity(
     fun paraDominio(): Credito {
         return Credito(
             id = id,
+            iduser = iduser!!,
             nome = nome!!,
             descricao = descricao!!,
             preco = preco!!,
@@ -32,6 +34,7 @@ data class CreditoEntity(
         fun doDominio(credito: Credito): CreditoEntity {
             return CreditoEntity(
             id = credito.id,
+            iduser = credito.iduser,
             nome = credito.nome,
             descricao = credito.descricao,
             preco = credito.preco,

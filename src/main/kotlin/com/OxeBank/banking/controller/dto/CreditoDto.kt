@@ -5,6 +5,8 @@ import jakarta.validation.constraints.*
 import java.math.BigDecimal
 
 class CreditoDto(
+    var iduser: Long?,
+
     @field:NotBlank(message = "o nome é obrigatorio")
     @field:Size(min = 3, max = 20, message = "o nome deve ter mais que 3 e menos que 20 caracteres")
     val nome: String? = null,
@@ -20,6 +22,7 @@ class CreditoDto(
     fun paraDominio(): Credito {
         return Credito(
             id = null,
+            iduser = iduser!!,
             nome = nome!!,
             descricao = descricao!!,
             preco = preco!!,
