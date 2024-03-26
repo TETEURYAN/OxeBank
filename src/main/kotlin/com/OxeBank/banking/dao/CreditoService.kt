@@ -3,17 +3,13 @@ package com.OxeBank.banking.service
 import com.OxeBank.banking.controller.dto.CreditoDto
 import com.OxeBank.banking.domain.Credito
 import com.OxeBank.banking.repository.CreditRepository
-import com.OxeBank.banking.repository.FaturaRepository
 import com.OxeBank.banking.repository.model.CreditoEntity
-import org.springframework.data.jpa.repository.Modifying
-import org.springframework.data.jpa.repository.Query
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 class CreditoService(
     private val creditRepository: CreditRepository,
-    private val faturaRepository: FaturaRepository
 ) {
 
     fun salvar(creditoDto: CreditoDto): Credito {
@@ -33,6 +29,20 @@ class CreditoService(
              creditRepository.findById(id).orElseThrow()
         }
         return alimentoEntity.paraDominio()
+    }
+
+    fun buscarComprasUser(idUser: Long): List<Credito>? {
+        val comprasByUser: MutableList<Credito> = mutableListOf()
+
+        val compras: List<Credito> = buscarTodos()
+
+        for (i in compras) {
+            if (i.iduser == idUser) {
+                comprasByUser.add(i)
+            }
+        }
+
+        return comprasByUser
     }
 
     fun deletar(id: Long) {

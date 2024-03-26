@@ -5,6 +5,6 @@ import com.OxeBank.banking.service.CreditoService
 data class Fatura (
     var idcartao: Long?,
     var name: String,
-    val precofatura: Long?
+    var precofatura: Long
 )
 

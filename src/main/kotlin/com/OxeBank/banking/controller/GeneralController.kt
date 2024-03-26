@@ -18,54 +18,59 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/v1/usuario")
-class CreditoController(
+@RequestMapping("/sistema")
+class GeneralController(
     private val creditoService: CreditoService,
     private val faturaService: FaturaService
 ) {
 
-    @PostMapping
+    @PostMapping("/adiciona")
     @ResponseStatus(HttpStatus.CREATED)
     fun salvar(@RequestBody creditoDto: CreditoDto): Credito? {
         var credito = creditoDto
-
+        faturaService.atualizarUser(credito)
         return creditoService.salvar(credito)
-        //return listaFatura.get(idFatura)?.credito?.salvar(creditoDto)
     }
 
-    @PostMapping("/fatura")
+    @PostMapping("/user")
     @ResponseStatus(HttpStatus.CREATED)
     fun salvarUser(@RequestBody faturaDto: FaturaDto): Fatura? {
         return faturaService.salvar(faturaDto)
-        //return listaFatura.get(idFatura)?.credito?.salvar(creditoDto)
     }
 
-    @GetMapping
+    @GetMapping("/produtos")
     fun buscarTodos(): List<Credito>{
         return creditoService.buscarTodos()
     }
 
-    @GetMapping("/fatura")
-    fun buscarTodosFatura(): List<Fatura>{
+    @GetMapping("/user")
+    fun buscarTodosUser(): List<Fatura>{
         return faturaService.buscarTodos()
     }
 
-    @GetMapping("/{idFatura}/{pesquisa}")
-    fun buscarComFiltro(@PathVariable idFatura: Long, @RequestBody  pesquisa: String): Credito? {
+    @GetMapping("/compras/{idUser}")
+    fun buscarComprasUser(@PathVariable idUser: Long): List<Credito>? {
+        return creditoService.buscarComprasUser(idUser)
+    }
+
+    @GetMapping("/produtos/{pesquisa}")
+    fun buscarComFiltro(@PathVariable pesquisa: String): Credito? {
         return creditoService.buscarComFiltro(pesquisa)
-        //return listaFatura.get(idFatura)?.credito?.buscarComFiltro(pesquisa)
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id: Long): Unit? {
+        var compra: Credito = creditoService.buscarComFiltro(id.toString())
+        faturaService.remover(compra)
         return creditoService.deletar(id)
-        //return listaFatura.get(idFatura)?.credito?.deletar(alvo)
     }
 
     @PutMapping("/{id}")
-    fun atualizar(@PathVariable  id: Long, @RequestBody creditoDto: CreditoDto): Credito?{
+    fun atualizar(@PathVariable  id:Long, @RequestBody creditoDto: CreditoDto): Credito?{
+        var compra: Credito = creditoService.buscarComFiltro(id.toString())
+        faturaService.remover(compra)
+        faturaService.atualizarUser(creditoDto)
        return creditoService.atualizar(id, creditoDto)
-        //return listaFatura.get(idFatura)?.credito?.atualizar(id,creditoDto)
     }
 }

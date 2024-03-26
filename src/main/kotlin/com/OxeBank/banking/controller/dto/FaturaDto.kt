@@ -17,12 +17,14 @@ class FaturaDto(
 
 ) {
 
-    fun paraDominio(): Fatura {
-        return Fatura(
-            idcartao = null,
-            name = name,
-            precofatura = precofatura
-        )
+    fun paraDominio(): Fatura? {
+        return precofatura?.let {
+            Fatura(
+                idcartao = null,
+                name = name,
+                precofatura = it
+            )
+        }
     }
 
 
