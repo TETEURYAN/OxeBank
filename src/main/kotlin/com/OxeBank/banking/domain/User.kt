@@ -1,8 +1,6 @@
 package com.OxeBank.banking.domain
 
-import com.OxeBank.banking.service.CreditoService
-
-data class Fatura (
+data class User (
     var idcartao: Long?,
     var name: String,
     var precofatura: Long

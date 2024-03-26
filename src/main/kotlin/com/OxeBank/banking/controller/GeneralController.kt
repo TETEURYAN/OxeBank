@@ -2,9 +2,9 @@ package com.OxeBank.banking.controller
 
 import com.OxeBank.banking.controller.dto.CreditoDto
 import com.OxeBank.banking.controller.dto.FaturaDto
-import com.OxeBank.banking.dao.FaturaService
+import com.OxeBank.banking.dao.UserService
 import com.OxeBank.banking.domain.Credito
-import com.OxeBank.banking.domain.Fatura
+import com.OxeBank.banking.domain.User
 import com.OxeBank.banking.service.CreditoService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -21,21 +21,21 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/sistema")
 class GeneralController(
     private val creditoService: CreditoService,
-    private val faturaService: FaturaService
+    private val userService: UserService
 ) {
 
     @PostMapping("/adiciona")
     @ResponseStatus(HttpStatus.CREATED)
     fun salvar(@RequestBody creditoDto: CreditoDto): Credito? {
         var credito = creditoDto
-        faturaService.atualizarUser(credito)
+        userService.atualizarUser(credito)
         return creditoService.salvar(credito)
     }
 
     @PostMapping("/user")
     @ResponseStatus(HttpStatus.CREATED)
-    fun salvarUser(@RequestBody faturaDto: FaturaDto): Fatura? {
-        return faturaService.salvar(faturaDto)
+    fun salvarUser(@RequestBody faturaDto: FaturaDto): User? {
+        return userService.salvar(faturaDto)
     }
 
     @GetMapping("/produtos")
@@ -44,8 +44,8 @@ class GeneralController(
     }
 
     @GetMapping("/user")
-    fun buscarTodosUser(): List<Fatura>{
-        return faturaService.buscarTodos()
+    fun buscarTodosUser(): List<User>{
+        return userService.buscarTodos()
     }
 
     @GetMapping("/compras/{idUser}")
@@ -62,15 +62,15 @@ class GeneralController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id: Long): Unit? {
         var compra: Credito = creditoService.buscarComFiltro(id.toString())
-        faturaService.remover(compra)
+        userService.remover(compra)
         return creditoService.deletar(id)
     }
 
     @PutMapping("/{id}")
     fun atualizar(@PathVariable  id:Long, @RequestBody creditoDto: CreditoDto): Credito?{
         var compra: Credito = creditoService.buscarComFiltro(id.toString())
-        faturaService.remover(compra)
-        faturaService.atualizarUser(creditoDto)
+        userService.remover(compra)
+        userService.atualizarUser(creditoDto)
        return creditoService.atualizar(id, creditoDto)
     }
 }

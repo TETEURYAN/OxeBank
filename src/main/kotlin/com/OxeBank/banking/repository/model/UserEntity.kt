@@ -1,13 +1,13 @@
 package com.OxeBank.banking.repository.model
 
-import com.OxeBank.banking.domain.Fatura
+import com.OxeBank.banking.domain.User
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity(name = "fatura")
-class FaturaEntity (
+class UserEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long?,
@@ -15,19 +15,19 @@ class FaturaEntity (
     val valor: Long?
 ){
 
-fun paraDominio(): Fatura{
-    return Fatura(
+fun paraDominio(): User{
+    return User(
         idcartao = id,
         name = nome,
         precofatura = valor!!,
     )
 }
     companion object{
-        fun doDominio(fatura: Fatura): FaturaEntity{
-            return FaturaEntity(
-                id = fatura.idcartao,
-                nome = fatura.name,
-                valor = fatura.precofatura
+        fun doDominio(user: User): UserEntity{
+            return UserEntity(
+                id = user.idcartao,
+                nome = user.name,
+                valor = user.precofatura
             )
         }
     }

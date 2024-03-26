@@ -1,12 +1,8 @@
 package com.OxeBank.banking.controller.dto
 
-import com.OxeBank.banking.domain.Credito
-import com.OxeBank.banking.domain.Fatura
-import jakarta.validation.constraints.Min
+import com.OxeBank.banking.domain.User
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
-import jakarta.validation.constraints.Size
-import java.math.BigDecimal
 
 class FaturaDto(
     val id: Long? = null,
@@ -17,9 +13,9 @@ class FaturaDto(
 
 ) {
 
-    fun paraDominio(): Fatura? {
+    fun paraDominio(): User? {
         return precofatura?.let {
-            Fatura(
+            User(
                 idcartao = null,
                 name = name,
                 precofatura = it
